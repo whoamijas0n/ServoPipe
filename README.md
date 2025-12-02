@@ -538,9 +538,7 @@ with mp_hands.Hands(model_complexity=0, max_num_hands=1) as hands:
 cap.release()
 cv2.destroyAllWindows()
 ```
-
 ## Guía de Gestos
-
 ```Plaintext
 +-------------------------+---------------------------+-----------------+
 |          GESTO          |          ACCIÓN           |  SERVO / GPIO   |
@@ -560,3 +558,29 @@ cv2.destroyAllWindows()
 | Mano Izquierda          | Giro anti-horario (CCW)   | -               |
 +-------------------------+---------------------------+-----------------+
 ```
+## Ejemplo de Aplicación: Grúa Robótica
+
+Este firmware está diseñado para controlar una Grúa Robótica de 3 Ejes. La lógica de control gestual permite operar la maquinaria de forma intuitiva sin tocar ningún controlador físico.
+
+## Mapeo de Movimientos
+
+Cada servo cumple una función mecánica específica dentro de la estructura de la grúa:
+
+```Plaintext
++---------------------+------------------+--------------------------+-----------------------------+-----------------------------+
+| COMPONENTE MECANICO |   SERVO (GPIO)   |   GESTO DE ACTIVACION    |   ACCION MANO DERECHA (CW)  |  ACCION MANO IZQUIERDA (CCW)|
++---------------------+------------------+--------------------------+-----------------------------+-----------------------------+
+| Base Rotatoria      | Servo 1 (Pin 13) | 1 Dedo (Indice)          | Gira la base a la Derecha   | Gira la base a la Izquierda |
++---------------------+------------------+--------------------------+-----------------------------+-----------------------------+
+| Brazo / Elevacion   | Servo 2 (Pin 12) | 2 Dedos (Indice+Medio)   | Mueve brazo hacia Arriba    | Mueve brazo hacia Abajo     |
++---------------------+------------------+--------------------------+-----------------------------+-----------------------------+
+| Pinza (Gripper)     | Servo 3 (Pin 14) | 3 Dedos (+ Anular)       | Cierra la pinza (Agarrar)   | Abre la pinza (Soltar)      |
++---------------------+------------------+--------------------------+-----------------------------+-----------------------------+
+```
+
+## Modos de Control
+
+* Pausa (Puño Cerrado ): Al cerrar el puño, los motores se frenan en su posición exacta actual. Esto es ideal para mantener el objeto suspendido en el aire mientras se mueve la base.
+
+* Reincio (Meñique): Al levantar solo el meñique, la grúa vuelve automáticamente a su posición central (90°), alineando la base y soltando la carga por seguridad.
+
