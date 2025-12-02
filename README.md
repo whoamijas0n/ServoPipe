@@ -28,5 +28,5 @@ El sistema soporta dos modos de operación:
 Esquema de conexión utilizando alimentación externa para proteger el ESP32.
 
 <p align="center">
-  <img src="img/serv.png" alt="Imagen de el circuito" width="850">
+  <img src="img/serv.png" alt="Imagen de el circuito" width="750">
 </p>
