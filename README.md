@@ -28,5 +28,21 @@ El sistema soporta dos modos de operación:
 Esquema de conexión utilizando alimentación externa para proteger el ESP32.
 
 <p align="center">
-  <img src="img/serv.png" alt="Imagen de el circuito" width="750">
+  <img src="img/serv.png" alt="Imagen de el circuito" width="650">
 </p>
+
+### Importante
+
+Nunca alimentes los servos directamente desde el pin 3.3V del ESP32. Usa siempre una fuente externa y unifica las tierras (GND) del ESP32 y las baterías.
+
+## Requisitos de Software
+
+* Python: Versión 3.8 a 3.11 (Recomendado para compatibilidad con MediaPipe).
+
+* Arduino IDE: Para cargar el código C++ al ESP32.
+
+* Librerías necesarias: ESP32Servo de Kevin Harrington.
+
+* Webcam: Funcional.
+
+  
